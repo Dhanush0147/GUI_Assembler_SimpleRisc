@@ -56,5 +56,5 @@ loop:
 - The assembler supports only the specific instruction set for this Simple RISC processor.
 - The GUI simplifies input but can also be bypassed if you wish to run `tiny.exe` manually.
 
-Happy coding! 🚀
+
 
