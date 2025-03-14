@@ -1,0 +1,15 @@
+start:
+	nop
+        b next
+next:
+	mov r1, 0x0001       ;fact = 1
+        mov r2, r0      ;the number is stored in input port register r0
+loop:
+        mul r1, r1, r2 ;fact = fact * i
+        subh r2, r2, 0x0001   ;decrement i
+        cmp r2, 0x0001       ;compare i > 1
+        bgt loop        ;if i > 1 then remain in loop
+        mov r3,r1      ;else the result is stored in output port register r3
+        ld r2,0x001[r3]
+        hlt             ;stops program counter to be incremented
+        

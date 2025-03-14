@@ -1,0 +1,8 @@
+Instructions for Running the Program:
+
+
+1.Extract all files from the GUI_ASSEMBLER zip file.
+2.Write any assembly code in ASM.txt.
+3.Compile tiny.cpp and generate an executable (.exe) file.
+4.Run GUI.py to open the interface.
+5.You can now input assembly code, including the example provided in the zip file, and see the output.
