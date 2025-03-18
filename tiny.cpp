@@ -104,14 +104,14 @@ int constant_checking(string s)
             if((chk>=48 && chk<=57) || (chk>=65 && chk<=70) || (chk>=97 && chk<=102) ){
                 if(i>6)
                 {
-                    //cout<<"the value is exceeding 16 bit"<<endl;
+                    cout<<"the value is exceeding 16 bit"<<endl;
                     return 0;
                 }
                 else{
                     continue;
                 }
             }else{
-               // cout<<"invalid immediate value "<<endl;
+               cout<<"invalid immediate value "<<endl;
                     return 0;
             }
         }
@@ -124,7 +124,7 @@ int constant_checking(string s)
 bool encode(int in,instr s)
 {
     string r = "";
-    cout<<"it is reading\n";
+   // cout<<"it is reading\n";
     //encoding for three operand instructions 
         if(in == 3)
     {
@@ -134,7 +134,11 @@ bool encode(int in,instr s)
         string modi ="" ;
         string temp="";
         int c=0;
-        
+        if(s.opcode.size()>2 && s.operand_3 == "")
+        {
+            cout << "incorrectt number of operands\n";
+            return false ;
+        }
         if(s.operand_2.find('[')!=string::npos)
         {
             string change = s.operand_2;
@@ -167,7 +171,7 @@ bool encode(int in,instr s)
             r+=opcodeTable.find(s.opcode)->second; 
             if(registers.find(s.operand_3)!=registers.end())
             {
-                //cout<<"the eneterd instruction is wrong";
+                cout<<"the eneterd instruction is wrong";
                 return false;
             }
 
@@ -181,7 +185,7 @@ bool encode(int in,instr s)
         }
       
         //r+='|';
-        cout<<r<<endl;
+       // cout<<r<<endl;
         char r_type;
         
          if(registers.find(s.operand_3)!=registers.end() )
@@ -210,7 +214,7 @@ bool encode(int in,instr s)
                     temp+=it->second;
                     }
                     else{
-                       // cout<<"there is a problem in your immediate value for the instruction"<<s.opcode<<s.operand_1<<s.operand_2<<s.operand_3<<endl;
+                       cout<<"there is a problem in your immediate value for the instruction"<<s.opcode<<s.operand_1<<s.operand_2<<s.operand_3<<endl;
                         return false ;
                         break ;
 
@@ -220,7 +224,7 @@ bool encode(int in,instr s)
              r_type ='1';
         }
         else{
-            //cout<<"your immediate value for the instruction is wrong";
+            cout<<"your immediate value for the instruction is wrong or you should enteer the three operands for this instruction\n ";
             return false;
         }
         r+=r_type;
@@ -241,7 +245,7 @@ bool encode(int in,instr s)
                  //r+='|';
         }
         else{
-           // cout<<"you can enter only valid registers  "<<endl;
+           cout<<"you can enter only valid registers  "<<endl;
             return false;
 
         }
@@ -262,10 +266,14 @@ bool encode(int in,instr s)
         string modi;
         string temp;
         char r_type;
-        
+        if(s.operand_2 == "")
+        {
+            cout<<"incorrect number of operands \n";
+            return false;
+        }
         if(s.operand_3!="")
         {
-            // cout<<"you cant enetr three operands for two operand instruction";
+             cout<<"you cant enetr three operands for two operand instruction";
             return false ;
         }
         s.operand_3="0000";
@@ -319,15 +327,15 @@ bool encode(int in,instr s)
                  type ="1";
             }
             else{
-                //cout<<"your immediate value for the instruction is wrong";
+                cout<<"your immediate value for the instruction is wrong\n";
                 return false;
             }
             if(registers.find(s.operand_1)!=registers.end()){
                 operand_1=registers.find(s.operand_1)->second;
-               // cout<<operand_1<<endl;
+                //cout<<operand_1<<endl;
             }
             else{
-              //  cout<<"you can enter only valid registers  "<<endl;
+               cout<<"you can enter only valid registers  "<<endl;
                 return false;
             }
             if(s.opcode == "cmp" )
@@ -340,8 +348,8 @@ bool encode(int in,instr s)
             r+=operand_1;
           //  r+="|";
             r+=temp;
-           cout<<r<<endl;
-           cout<<r.size()<<endl;
+        //    cout<<r<<endl;
+        //    cout<<r.size()<<endl;
        
         }
         else if (s.opcode == "mov" || s.opcode == "not")
@@ -354,8 +362,8 @@ bool encode(int in,instr s)
             r+=s.operand_3;
           //  r+="|";
             r+=temp;
-           cout<<r<<endl;
-           cout<<r.size()<<endl;
+          // cout<<r<<endl;
+          // cout<<r.size()<<endl;
 
 
 
@@ -374,6 +382,7 @@ bool encode(int in,instr s)
         }
         else{
            cout<<"give in an incorrect label at "<<s.operand_2<<endl;
+           return false;
         }
         r+=opcodeTable.find(s.opcode)->second;
         //r+="|";
@@ -408,7 +417,7 @@ bool check = true;
             else if(two_operands.find(s.opcode)!= two_operands.end())
             {
                 check = encode(2,s);
-                cout<<"it is a two operna one \n";
+               // cout<<"it is a two operna one \n";
             }
             else if(one_operands.find(s.opcode)!= one_operands.end())
             {
@@ -420,7 +429,7 @@ bool check = true;
             }
         }
         else {
-            cout<<"there is an incorrect opcode entered in "<<s.opcode<<endl;
+            cout<<"there is an incorrect opcode entered in or  "<<s.opcode<<endl;
             check = false ;
         }
         return check ;
@@ -505,8 +514,7 @@ string inst(string s)
 
     instruction.push_back(rob); 
     return temp ;
-}
-void writeHexFile(const vector<string>& binaryStrings, const string& filename) {
+}void writeHexFile(const vector<string>& binaryStrings, const string& filename) {
     ofstream outFile(filename);
     if (!outFile) {
         cerr << "Error opening file!" << endl;
@@ -518,35 +526,31 @@ void writeHexFile(const vector<string>& binaryStrings, const string& filename) {
             cerr << "Invalid binary string length: " << binaryString << endl;
             continue;
         }
-        
+
         bitset<32> bits(binaryString); // Convert binary string to bitset
-        outFile << hex << uppercase << bits.to_ulong() << endl; // Convert to hex and write
+        outFile << setw(8) << setfill('0') << hex << uppercase << bits.to_ulong() << endl; // Ensure 8 hex digits
     }
 
     outFile.close();
-    cout << "Hex file written successfully." << endl;
+   // cout << "Hex file written successfully." << endl;
 }
+
+
 void writeBinaryFile(const vector<string>& binaryStrings, const string& filename) {
-    ofstream outFoile(filename, ios::binary);
-    if (!outFoile) {
+    ofstream outFile(filename, ios::binary);
+    if (!outFile) {
         cerr << "Error opening file!" << endl;
         return;
     }
 
     for (const string& binaryString : binaryStrings) {
-        if (binaryString.length() != 32) {
-            cerr << "Invalid binary string length: " << binaryString << endl;
-            continue;
-        }
-        
-        bitset<32> bits(binaryString); // Convert binary string to bitset
-        uint32_t value = bits.to_ulong(); // Convert to 32-bit unsigned integer
-        outFoile.write(reinterpret_cast<const char*>(&value), sizeof(value)); // Write as binary
+        outFile.write(binaryString.c_str(), binaryString.size());
+        outFile.put('\n');
     }
 
-    outFoile.close();
-    cout << "Binary file written successfully." << endl;
+    outFile.close();
 }
+
 
 
 int main()
@@ -556,7 +560,7 @@ int main()
    
     if(inputfile.is_open())
     {
-        cout<<"file is open \n";
+       // cout<<"file is open \n";
     }
     else{
         cout<<"file is unable to open\n";
@@ -633,7 +637,7 @@ int main()
                 offset_addr = 200;
                 label.insert({label_inside,adress+1});
                 }
-                cout<<"only label\n";
+              //  cout<<"only label\n";
                 break;
             case 2:
             if(label_inside=="start"){
@@ -647,16 +651,15 @@ int main()
                      instruction_inside=parser(instruction_inside);
                 inst(instruction_inside);
                  adress++;
-                cout<<"instruction and label\n";
+               // cout<<"instruction and label\n";
                  break;
             case 3:
                 instruction_inside=parser(instruction_inside);
                 inst(instruction_inside);
                 adress++;
-                cout<<"single instruction\n";
+               // cout<<"single instruction\n";
                 break;
-                default:
-                cout<<"program end\n";
+                //cout<<"program end\n";
          }
             // offset_addr=adress;
             // label.insert({temp_1,0});
@@ -686,19 +689,28 @@ int main()
 
     }
     inputfile.close();
+    int error_check = 0;
     for(int i=0;i<instruction.size();i++){
     if(valid(instruction[i])){
-        cout<<instruction[i].opcode<<endl;
-     cout<<"instruction is correct\n";
+       // cout<<instruction[i].opcode<<endl;
+     //cout<<"instruction is correct\n";
      }else{
-     cout<<"instruction is not valid\n";
+    // cout<<"instruction is not valid\n";
+        error_check = 1;
+        break;
+
      }
     }
+    if(error_check!=1)
+    {
+        cout<<"NO errors";
+    }
+
     writeHexFile(encoding, "output.hex");
-    writeBinaryFile(encoding, "output.bin");
+    writeBinaryFile(encoding, "output.txt");
     for (int i = 0; i < encoding.size(); i++) {
         int r=0;
-        cout<<encoding[i]<<endl;
+       // cout<<encoding[i]<<endl;
         } // Move to the next line after each element
         return 0;
 
