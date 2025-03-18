@@ -50,27 +50,5 @@ python main.py
 - **Clear Button:** Clears all input and output fields.
 - **Mac-Style Buttons:** Close, minimize, and maximize buttons are included for better window management.
 
-## Uploading to GitHub
-To push changes to GitHub, follow these steps:
-1. Stage all changes:
-   ```sh
-   git add .
-   ```
-2. Commit the changes:
-   ```sh
-   git commit -m "Updated GUI and documentation"
-   ```
-3. Push to the repository:
-   ```sh
-   git push origin main
-   ```
 
-## Troubleshooting
-- If the GUI does not open, ensure you have installed `PyQt5` correctly.
-- If `tiny.exe` is missing or not running, check if it's properly placed in the project directory.
-- Ensure that file permissions allow execution of `tiny.exe`.
-
-For further support, create an issue in the GitHub repository.
-
----
 
