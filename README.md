@@ -18,7 +18,7 @@ AssemblerGUI/
 │── main.py  # The main Python script containing the GUI
 │── tiny.exe  # Assembler executable
 │── asm.txt  # Temporary file for assembly code
-│── output.bin  # Binary output file
+│── output.txt  # Binary output file
 │── output.hex  # Hex output file
 │── README.md  # This guide
 ```
