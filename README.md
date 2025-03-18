@@ -48,6 +48,7 @@ python assembler_gui.py
 ```
 
 ---
+![Assembler GUI](UI.png)
 
 ## Using the UI
 ### 1. **Input Section**
