@@ -15,7 +15,7 @@ Ensure that all required files are placed in a single directory for proper execu
 
 ```
 AssemblerGUI/
-│── main.py  # The main Python script containing the GUI
+│── gui.py  # The main Python script containing the GUI
 │── tiny.exe  # Assembler executable
 │── asm.txt  # Temporary file for assembly code
 │── output.txt  # Binary output file
@@ -38,7 +38,7 @@ AssemblerGUI/
 ## Running the GUI
 To start the GUI, navigate to the project directory and run:
 ```sh
-python main.py
+python gui.py
 ```
 
 ## Using the GUI
