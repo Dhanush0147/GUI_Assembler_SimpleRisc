@@ -1,60 +1,76 @@
-# GUI_Assembler_SimpleRisc
-# Tiny Assembler for Simple RISC Processor
+# Assembler GUI - User Guide
 
-This is a simple assembler for a custom 21-instruction, 16-register Simple RISC processor. The assembler is written in C++ and includes a basic GUI using PyQt to provide a user-friendly interface for entering and processing assembly instructions.
+## Overview
+This Assembler GUI provides a user-friendly interface to write and execute assembly code, view debugging information, and output binary and hexadecimal representations of the compiled code.
 
-## Features
-- Converts assembly code into binary and hexadecimal formats.
-- Supports 21 instructions and 16 registers.
-- Simple PyQt-based GUI for user input.
+## Prerequisites
+Before running the UI, ensure that you have the following installed on your system:
+- Python 3.x
+- PyQt5 (for GUI components)
+- A working assembler (`tiny.exe` is used in this project)
+- Git (for repository management)
 
-## Installation
-### Prerequisites
-- C++ Compiler (g++)
-- Python (>=3.7)
-- PyQt Library (`pip install PyQt5`)
+## Directory Structure
+Ensure that all required files are placed in a single directory for proper execution. Your project folder should be structured as follows:
 
-### Setup
-1. Compile the assembler:
-   ```sh
-   g++ tiny.cpp -o tiny.exe
-   ```
-2. Ensure the following files are in the same directory as `tiny.exe` and `gui.py`:
-   - `asm.txt` (for input assembly code)
-   - `output.bin` (binary output file)
-   - `output.hex` (hexadecimal output file)
-3. Run the GUI:
-   ```sh
-   python gui.py
-   ```
-
-## Usage
-1. Enter your assembly code in the GUI input field.
-2. Click 'Assemble' to generate the corresponding machine code.
-3. The hexadecimal output will be displayed below.
-
-## Example Input
-```assembly
-start:
-    nop
-    b next
-next:
-    mov r1, 0x0001       ;fact = 1
-    mov r2, r0      ;the number is stored in input port register r0
-loop:
-    mul r1, r1, r2 ;fact = fact * i
-    subh r2, r2, 0x0001   ;decrement i
-    cmp r2, 0x0001       ;compare i > 1
-    bgt loop        ;if i > 1 then remain in loop
-    mov r3,r1      ;else the result is stored in output port register r3
-    ld r2,0x001[r3]
-    hlt             ;stops program counter to be incremented
+```
+AssemblerGUI/
+│── main.py  # The main Python script containing the GUI
+│── tiny.exe  # Assembler executable
+│── asm.txt  # Temporary file for assembly code
+│── output.bin  # Binary output file
+│── output.hex  # Hex output file
+│── README.md  # This guide
 ```
 
-## Notes
-- Ensure the required files are present before running the GUI.
-- The assembler supports only the specific instruction set for this Simple RISC processor.
-- The GUI simplifies input but can also be bypassed if you wish to run `tiny.exe` manually.
+## Installation & Setup
+1. Clone this repository from GitHub:
+   ```sh
+   git clone https://github.com/yourusername/AssemblerGUI.git
+   cd AssemblerGUI
+   ```
 
+2. Install required dependencies:
+   ```sh
+   pip install PyQt5
+   ```
 
+## Running the GUI
+To start the GUI, navigate to the project directory and run:
+```sh
+python main.py
+```
+
+## Using the GUI
+- **Input Box:** Write assembly code in the left-side input box.
+- **Run Button:** Executes the assembler and compiles the input code.
+- **Debug Button:** Displays debugging output.
+- **Binary Output Button:** Shows binary representation of the compiled code.
+- **Hex Output Button:** Displays hexadecimal output.
+- **Clear Button:** Clears all input and output fields.
+- **Mac-Style Buttons:** Close, minimize, and maximize buttons are included for better window management.
+
+## Uploading to GitHub
+To push changes to GitHub, follow these steps:
+1. Stage all changes:
+   ```sh
+   git add .
+   ```
+2. Commit the changes:
+   ```sh
+   git commit -m "Updated GUI and documentation"
+   ```
+3. Push to the repository:
+   ```sh
+   git push origin main
+   ```
+
+## Troubleshooting
+- If the GUI does not open, ensure you have installed `PyQt5` correctly.
+- If `tiny.exe` is missing or not running, check if it's properly placed in the project directory.
+- Ensure that file permissions allow execution of `tiny.exe`.
+
+For further support, create an issue in the GitHub repository.
+
+---
 
